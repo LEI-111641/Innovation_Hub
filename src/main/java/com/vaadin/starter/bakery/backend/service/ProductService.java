@@ -14,7 +14,7 @@ import com.vaadin.starter.bakery.backend.data.entity.User;
 import com.vaadin.starter.bakery.backend.repositories.ProductRepository;
 
 /**
- * Serviço para gerenciamento de {@link Product} que implementa operações CRUD
+ * Serviço para gerenciamento de {@link Product} que implementa operações CRUD 
  * filtráveis, utilizando um repositório JPA para persistência.
  * 
  * <p>Fornece métodos para buscar produtos, contar produtos com filtros,
