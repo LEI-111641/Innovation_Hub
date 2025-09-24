@@ -24,6 +24,10 @@ import javax.annotation.security.RolesAllowed;
 
 import static com.vaadin.starter.bakery.ui.utils.BakeryConst.PAGE_PRODUCTS;
 
+/**
+ * View for managing products in the admin interface.
+ * Provides CRUD operations for Product entities.
+ */
 @Route(value = PAGE_PRODUCTS, layout = MainView.class)
 @PageTitle(BakeryConst.TITLE_PRODUCTS)
 @RolesAllowed(Role.ADMIN)
@@ -31,10 +35,17 @@ public class ProductsView extends AbstractBakeryCrudView<Product> {
 
 	private CurrencyFormatter currencyFormatter = new CurrencyFormatter();
 
+	/**
+	 * Creates the product management view.
+	 *
+	 * @param service     the service used for product persistence
+	 * @param currentUser the currently logged-in user
+	 */
 	@Autowired
 	public ProductsView(ProductService service, CurrentUser currentUser) {
 		super(Product.class, service, new Grid<>(), createForm(), currentUser);
 	}
+
 
 	@Override
 	protected Product createItem() {

@@ -13,16 +13,31 @@ import com.vaadin.starter.bakery.backend.data.entity.PickupLocation;
 import com.vaadin.starter.bakery.backend.data.entity.User;
 import com.vaadin.starter.bakery.backend.repositories.PickupLocationRepository;
 
+/**
+ * Service for managing pickup locations.
+ */
 @Service
-public class PickupLocationService implements FilterableCrudService<PickupLocation>{
+public class PickupLocationService implements FilterableCrudService<PickupLocation> {
 
 	private final PickupLocationRepository pickupLocationRepository;
 
+	/**
+	 * Constructs a new PickupLocationService.
+	 *
+	 * @param pickupLocationRepository the repository used to manage pickup locations
+	 */
 	@Autowired
 	public PickupLocationService(PickupLocationRepository pickupLocationRepository) {
 		this.pickupLocationRepository = pickupLocationRepository;
 	}
 
+	/**
+	 * Finds pickup locations matching a given filter, or all if no filter is provided.
+	 *
+	 * @param filter   optional search filter
+	 * @param pageable pagination information
+	 * @return a page of pickup locations
+	 */
 	public Page<PickupLocation> findAnyMatching(Optional<String> filter, Pageable pageable) {
 		if (filter.isPresent()) {
 			String repositoryFilter = "%" + filter.get() + "%";
