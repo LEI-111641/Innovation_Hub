@@ -7,7 +7,7 @@ public class DeliveryStats {
 	private int dueTomorrow;
 	private int notAvailableToday;
 	private int newOrders;
-
+//branch testing
 	public int getDeliveredToday() {
 		return deliveredToday;
 	}
