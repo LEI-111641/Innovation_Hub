@@ -1,5 +1,6 @@
 package com.vaadin.starter.bakery.backend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,17 @@ public class PickupLocationService implements FilterableCrudService<PickupLocati
 
 	public PickupLocation getDefault() {
 		return findAnyMatching(Optional.empty(), PageRequest.of(0, 1)).iterator().next();
+	}
+
+	/**
+	 * Returns the first available pickup location if present.
+	 *
+	 * @return an Optional containing the first pickup location, or empty if none exist
+	 */
+	public Optional<PickupLocation> getFirst() {
+		return findAnyMatching(Optional.empty(), PageRequest.of(0, 1))
+				.stream()
+				.findFirst();
 	}
 
 	@Override
