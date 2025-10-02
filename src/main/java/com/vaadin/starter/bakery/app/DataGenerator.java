@@ -359,3 +359,4 @@ public class DataGenerator implements HasLogger {
 		return user;
 	}
 }
+

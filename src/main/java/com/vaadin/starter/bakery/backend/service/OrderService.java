@@ -259,5 +259,16 @@ public class OrderService implements CrudService<Order> {
         order.setDueDate(LocalDate.now());
         return order;
     }
+    /**
+     * Verifica se uma encomenda está atrasada (data de entrega anterior a hoje).
+     *
+     * @param order encomenda a verificar
+     * @return {@code true} se a encomenda estiver atrasada, caso contrário {@code false}
+     */
+    public boolean isOrderOverdue(Order order) {
+        return order.getDueDate() != null && order.getDueDate().isBefore(LocalDate.now())
+                && order.getState() != OrderState.DELIVERED
+                && order.getState() != OrderState.CANCELLED;
+    }
 
 }
