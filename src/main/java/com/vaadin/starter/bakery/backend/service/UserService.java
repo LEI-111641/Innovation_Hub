@@ -25,7 +25,7 @@ public class UserService implements FilterableCrudService<User> {
     public static final String MODIFY_LOCKED_USER_NOT_PERMITTED = "User has been locked and cannot be modified or deleted";
 
     /** Mensagem de erro usada ao tentar excluir a própria conta. */
-    private static final String DELETING_SELF_NOT_PERMITTED = "You cannot delete your own account";
+    private static final String DELETING_SELF_NOT_PERMITTED = "Não é permitido eliminar a sua própria conta";
 
     private final UserRepository userRepository;
 
