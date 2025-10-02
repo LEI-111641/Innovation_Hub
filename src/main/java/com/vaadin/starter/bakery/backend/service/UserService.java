@@ -160,4 +160,22 @@ public class UserService implements FilterableCrudService<User> {
     public User createNew(User currentUser) {
         return new User();
     }
+
+    /**
+     * Alterna o estado de bloqueio de um usuário.
+     * - Se estiver desbloqueado, passa a bloqueado.
+     * - Se estiver bloqueado, passa a desbloqueado.
+     *
+     * @param currentUser usuário logado atualmente (não utilizado aqui, mas pode ser validado futuramente)
+     * @param targetUser  usuário a ser atualizado
+     * @return usuário atualizado
+     */
+    @Transactional
+    public User toggleUserLock(User currentUser, User targetUser) {
+        if (targetUser == null) {
+            throw new IllegalArgumentException("Usuário inválido");
+        }
+        targetUser.setLocked(!targetUser.isLocked());
+        return userRepository.saveAndFlush(targetUser);
+    }
 }
