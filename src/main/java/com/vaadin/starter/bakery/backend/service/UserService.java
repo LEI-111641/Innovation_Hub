@@ -25,7 +25,7 @@ public class UserService implements FilterableCrudService<User> {
     public static final String MODIFY_LOCKED_USER_NOT_PERMITTED = "User has been locked and cannot be modified or deleted";
 
     /** Mensagem de erro usada ao tentar excluir a própria conta. */
-    private static final String DELETING_SELF_NOT_PERMITTED = "Não é permitido eliminar a sua própria conta";
+    private static final String DELETING_SELF_NOT_PERMITTED = "You cannot delete your own account";
 
     private final UserRepository userRepository;
 
@@ -159,5 +159,23 @@ public class UserService implements FilterableCrudService<User> {
     @Override
     public User createNew(User currentUser) {
         return new User();
+    }
+
+    /**
+     * Alterna o estado de bloqueio de um usuário.
+     * - Se estiver desbloqueado, passa a bloqueado.
+     * - Se estiver bloqueado, passa a desbloqueado.
+     *
+     * @param currentUser usuário logado atualmente (não utilizado aqui, mas pode ser validado futuramente)
+     * @param targetUser  usuário a ser atualizado
+     * @return usuário atualizado
+     */
+    @Transactional
+    public User toggleUserLock(User currentUser, User targetUser) {
+        if (targetUser == null) {
+            throw new IllegalArgumentException("Usuário inválido");
+        }
+        targetUser.setLocked(!targetUser.isLocked());
+        return userRepository.saveAndFlush(targetUser);
     }
 }
