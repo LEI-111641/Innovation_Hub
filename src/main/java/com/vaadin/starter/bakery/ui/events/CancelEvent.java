@@ -35,3 +35,4 @@ public class CancelEvent extends ComponentEvent<Component> {
         super(source, fromClient);
     }
 }
+
